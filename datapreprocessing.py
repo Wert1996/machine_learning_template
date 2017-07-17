@@ -21,7 +21,7 @@ def label_encoding(X, list_indices):
     return X
 
 
-def OneHotEncoding(X, list_indices):
+def oneHotEncoding(X, list_indices):
     print('Onehotencoding..')
     X = X.astype(float)
     for i in list_indices:
