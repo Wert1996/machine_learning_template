@@ -66,10 +66,10 @@ def encode(X, list_indices=None):
     return X
 
 
-def split_data_into_train_and_test(X, ratio):
+def split_data_into_train_and_test(X, y, ratio):
     print('Splitting data')
-    X_train, X_test = train_test_split(X, test_size=ratio, random_state=0)
-    return X_train, X_test
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=ratio, random_state=0)
+    return X_train, X_test, y_train, y_test
 
 
 def scaling(X):
