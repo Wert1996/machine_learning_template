@@ -56,6 +56,7 @@ def random_forest_classification(X, y, X_test, trees=10):
     return y_pred
 
 
+# For classification using artificial neural network
 def ann_classify(input_dim, hidden, output_dim, X_train, y_train, X_test):
     model = Sequential()
     model.add(Dense(output_dim=hidden, init='uniform', activation='relu', input_dim=input_dim))

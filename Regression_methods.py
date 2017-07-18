@@ -6,6 +6,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.svm import SVR
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+from keras.layers import Dense
+from keras.models import Sequential
 
 
 def linear_regression(X, y, X_test):
@@ -50,8 +52,12 @@ def random_forest_regressor(X, y, trees, X_test):
     return y_pred
 
 
-
-
-
-
-
+# Regression using Artificial Neural Nets
+def ann_regression(input_dim, hidden, output_dim, X_train, y_train, X_test):
+    regressor = Sequential()
+    regressor.add(Dense(output_dim=hidden, input_dim=input_dim, activation='relu'))
+    regressor.add(Dense(output_dim=output_dim, activation='linear'))
+    regressor.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
+    regressor.fit(X_train, y_train, epochs=100, batch_size=10)
+    y_pred = regressor.predict(X_test)
+    return y_pred
