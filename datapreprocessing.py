@@ -44,8 +44,25 @@ def oneHotEncoding(X, list_indices):
     print('Onehotencoding..')
     X = X.astype(float)
     for i in list_indices:
-        onehotencoder = OneHotEncoder(categorical_features=i)
+        onehotencoder = OneHotEncoder(categorical_features=[i])
         X = onehotencoder.fit_transform(X)
+    return X
+
+
+def encode(X, list_indices=None):
+    print('Encoding with label..')
+    if list_indices is None:
+        list_indices = []
+        for i in range(X.shape[1]):
+            if isinstance(X[0][i], str):
+                list_indices.append(i)
+    for i in list_indices:
+        label_encoder = LabelEncoder()
+        X[:, i] = label_encoder.fit_transform(X[:, i])
+    print('Onehotencoding..')
+    for i in list_indices:
+        onehotencoder = OneHotEncoder(categorical_features=[i])
+        X = onehotencoder.fit_transform(X).toarray()
     return X
 
 
