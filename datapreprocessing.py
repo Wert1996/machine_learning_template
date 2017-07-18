@@ -27,8 +27,13 @@ def impute(X):
     return X
 
 
-def label_encoding(X, list_indices):
+def label_encoding(X, list_indices=None):
     print('Encoding with label..')
+    if list_indices is None:
+        list_indices = []
+        for i in range(X.shape[1]):
+            if isinstance(X[0][i], str):
+                list_indices.append(i)
     for i in list_indices:
         label_encoder = LabelEncoder()
         X[:, i] = label_encoder.fit_transform(X[:, i])
