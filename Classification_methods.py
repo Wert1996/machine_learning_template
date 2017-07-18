@@ -4,6 +4,8 @@ from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from keras.models import Sequential
+from keras.layers import Dense
 
 
 def logistic_classification(X, y, X_test):
@@ -53,3 +55,13 @@ def random_forest_classification(X, y, X_test, trees=10):
     y_pred = classifier.predict(X_test)
     return y_pred
 
+
+def ann_classify(input_dim, hidden, output_dim, X_train, y_train, X_test):
+    model = Sequential()
+    model.add(Dense(output_dim=hidden, init='uniform', activation='relu', input_dim=input_dim))
+    model.add(Dense(output_dim=output_dim, init='uniform', activation='sigmoid'))
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    model.fit(X_train, y_train, batch_size=10, np_epoch=100)
+    y_pred = model.predict(X_test)
+    y_pred = (y_pred >= 0.5)
+    return y_pred
